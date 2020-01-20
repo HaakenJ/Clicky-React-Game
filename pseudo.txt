@@ -1,0 +1,28 @@
+Components
+    pictures
+        each picture should have a state of whether or not it has been clicked yet
+        each picture has a clickHandler that will toggle the clicked state
+    game object
+        contains the state of the current score of the game
+        when a picture is clicked
+            if the property of clicked is true
+                reset the game
+            else
+                increment the game score
+    NavBar
+        displays the logo from props
+        displays a message from props
+        displays score and top score from props
+    JumboTron
+        displays the logo from props
+        displays instructions for the game from props
+        
+
+Containers
+
+Functionality
+    - when the pictures are rendered on the page they are done so in random order
+    - each time on of the pictures is clicked, a setState function is called so
+    that the order of images is rearranged.
+    - when the same picture gets clicked a second time, the score is reset and the
+    game starts over with all pictures' clicked values set to false.
