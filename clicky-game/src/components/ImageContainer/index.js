@@ -104,8 +104,7 @@ class ImageContainer extends Component {
                 this.setState({ 
                     data: newData,
                     score: this.state.score + 1
-                });
-                
+                }); 
         }
     }
 
