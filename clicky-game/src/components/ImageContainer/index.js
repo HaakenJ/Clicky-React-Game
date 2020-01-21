@@ -1,69 +1,70 @@
 import React, {
     Component
 } from "react";
-import NavBar from "./NavBar";
-import Header from "./Header";
-import Image from "./Image";
+import NavBar from "../NavBar";
+import Header from "../Header";
+import Image from "../Image";
+import "./style.css";
 
 class ImageContainer extends Component {
     state = {
         data: [{
+                id: 0,
                 clicked: false,
-                id: 1,
                 image: "../../public/img/goku.png"
             }, {
+                id: 1,
                 clicked: false,
-                id: 2,
                 image: "../../public/img/bulma.png"
             },
             {
+                id: 2,
                 clicked: false,
-                id: 3,
                 image: "../../public/img/chiaotzu.png"
             },
             {
+                id: 3,
                 clicked: false,
-                id: 4,
                 image: "../../public/img/krillin.png"
             },
             {
+                id: 4,
                 clicked: false,
-                id: 5,
                 image: "../../public/img/mrpopo.png"
             },
             {
+                id: 5,
                 clicked: false,
-                id: 6,
                 image: "../../public/img/mutenroshi.png"
             },
             {
+                id: 6,
                 clicked: false,
-                id: 7,
                 image: "../../public/img/oolong.png"
             },
             {
+                id: 7,
                 clicked: false,
-                id: 8,
                 image: "../../public/img/piccolo.png"
             },
             {
+                id: 8,
                 clicked: false,
-                id: 9,
                 image: "../../public/img/pilaf.png"
             },
             {
+                id: 9,
                 clicked: false,
-                id: 10,
                 image: "../../public/img/tenshinhan.png"
             },
             {
+                id: 10,
                 clicked: false,
-                id: 11,
                 image: "../../public/img/yajirobe.png"
             },
             {
+                id: 11,
                 clicked: false,
-                id: 12,
                 image: "../../public/img/yamucha.png"
             }
         ],
@@ -81,5 +82,14 @@ class ImageContainer extends Component {
             arrCopy[j] = temp;
         }
         return arrCopy;
+    }
+
+
+    render() {
+        return (
+            <NavBar />
+            <Header />
+            
+        )
     }
 }

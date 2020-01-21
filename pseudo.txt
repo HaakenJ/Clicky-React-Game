@@ -26,3 +26,6 @@ Functionality
     that the order of images is rearranged.
     - when the same picture gets clicked a second time, the score is reset and the
     game starts over with all pictures' clicked values set to false.
+
+    I will call the shuffleArray(data).map() function in the render() function
+    so that the order is shuffled each time the page is rendered.

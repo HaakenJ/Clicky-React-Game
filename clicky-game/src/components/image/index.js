@@ -6,7 +6,7 @@ function Image(props) {
     <div
       role="img"
       aria-label="click item"
-      className="click-item"
+      className="click-item shake"
       style={{backgroundImage: `url(${props.image})`}}
     >
     </div>
