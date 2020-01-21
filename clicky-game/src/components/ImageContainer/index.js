@@ -72,6 +72,10 @@ class ImageContainer extends Component {
         topScore: 0
     }
 
+    componentDidMount() {
+        this.setState({ data: this.shuffleArray(this.state.data) });
+    }
+
     shuffleArray = array => {
         const arrCopy = array.slice();
         let i = arrCopy.length - 1;
