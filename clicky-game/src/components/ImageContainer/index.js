@@ -84,6 +84,14 @@ class ImageContainer extends Component {
         return arrCopy;
     }
 
+    getImageById = id => {
+        for (let i = 0; i < this.state.data.length; i++) {
+            if (this.state.data[i].id === id) {
+                return this.state.data[i];
+            }
+        }
+    }
+
 
     render() {
         return (
