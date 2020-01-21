@@ -5,7 +5,7 @@ function Image(props) {
   return (
     <div
       role="img"
-      dataId={props.id}
+      data-id={props.id}
       aria-label="click item"
       className="click-item shake"
       style={{backgroundImage: `url(${props.image})`}}

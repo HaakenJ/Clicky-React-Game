@@ -79,7 +79,7 @@ class ImageContainer extends Component {
     }
 
     handleClick = event => {
-        const id = event.target.data - id;
+        const id = event.target[data-id];
         const values = this.getImageById(id);
         const clickedImg = values[0];
         const clickedIndex = values[1];
@@ -93,18 +93,31 @@ class ImageContainer extends Component {
             clickedImg[clicked] = true;
             newData.push(clickedImg);
             // Check if the new score is higher than topScore and setState.
-            (this.state.score + 1) > this.state.topScore ? 
-                this.setState({ 
+            if ((this.state.score + 1) > this.state.topScore) {
+                this.setState({
                     data: newData,
                     score: this.state.score + 1,
                     // Not sure if score will update before topScore.
                     // May be a race condition...
                     topScore: this.state.score
-                }) :
-                this.setState({ 
+                });
+            } else {
+                this.setState({
                     data: newData,
                     score: this.state.score + 1
-                }); 
+                });
+            }
+        } else {
+            // TO-DO: Give some kind of notification that the user lost.
+            console.log("lost");
+            // Set all clicked values to false.
+            const unclickedData = this.setClickedFalse(this.state.data);
+            // Reset and rerender data and score.
+            // Leaving topScore untouched so that we keep the user's topScore.
+            this.setState({
+                data: this.shuffleArray(unclickedData),
+                score: 0
+            })
         }
     }
 
@@ -128,12 +141,22 @@ class ImageContainer extends Component {
         }
     }
 
+    setClickedFalse = arr => {
+        arrCopy = arr.slice();
+        arrCopy.forEach(item => {
+            item.clicked = false;
+        })
+        return arrCopy;
+    }
+
 
     render() {
-        return ( <
-            NavBar / >
-            <
-            Header / >
+        return (
+            <div>
+                <NavBar / >
+                <Header / >
+                
+            </div>
 
         )
     }
