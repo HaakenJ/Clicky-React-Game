@@ -70,4 +70,16 @@ class ImageContainer extends Component {
         score: 0,
         topScore: 0
     }
+
+    shuffleArray = array => {
+        const arrCopy = array.slice();
+        let i = arrCopy.length - 1;
+        for (; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            temp = arrCopy[i];
+            arrCopy[i] = arrCopy[j];
+            arrCopy[j] = temp;
+        }
+        return arrCopy;
+    }
 }
