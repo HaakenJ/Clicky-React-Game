@@ -73,7 +73,40 @@ class ImageContainer extends Component {
     }
 
     componentDidMount() {
-        this.setState({ data: this.shuffleArray(this.state.data) });
+        this.setState({
+            data: this.shuffleArray(this.state.data)
+        });
+    }
+
+    handleClick = event => {
+        const id = event.target.data - id;
+        const values = this.getImageById(id);
+        const clickedImg = values[0];
+        const clickedIndex = values[1];
+
+        // If the image has not been clicked before now.
+        if (!clickedImg[clicked]) {
+            // Create new data array without the item that was clicked.
+            const newData = this.state.data.slice(0, clickedIndex) +
+                this.state.data.slice(clickedIndex + 1);
+            // Set clicked to true and add the clicked item back in.
+            clickedImg[clicked] = true;
+            newData.push(clickedImg);
+            // Check if the new score is higher than topScore and setState.
+            (this.state.score + 1) > this.state.topScore ? 
+                this.setState({ 
+                    data: newData,
+                    score: this.state.score + 1,
+                    // Not sure if score will update before topScore.
+                    // May be a race condition...
+                    topScore: this.state.score
+                }) :
+                this.setState({ 
+                    data: newData,
+                    score: this.state.score + 1
+                });
+                
+        }
     }
 
     shuffleArray = array => {
@@ -91,17 +124,18 @@ class ImageContainer extends Component {
     getImageById = id => {
         for (let i = 0; i < this.state.data.length; i++) {
             if (this.state.data[i].id === id) {
-                return this.state.data[i];
+                return [this.state.data[i], i];
             }
         }
     }
 
 
     render() {
-        return (
-            <NavBar />
-            <Header />
-            
+        return ( <
+            NavBar / >
+            <
+            Header / >
+
         )
     }
 }
