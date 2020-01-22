@@ -2,7 +2,7 @@ import React, {
     Component
 } from "react";
 import NavBar from "../NavBar";
-import Header from "../Header";
+import Head from "../Head";
 import Image from "../Image";
 import "./style.css";
 
@@ -11,61 +11,61 @@ class ImageContainer extends Component {
         data: [{
                 id: 0,
                 clicked: false,
-                image: "../../public/img/goku.png"
+                image: "/img/goku.png"
             }, {
                 id: 1,
                 clicked: false,
-                image: "../../public/img/bulma.png"
+                image: "/img/bulma.png"
             },
             {
                 id: 2,
                 clicked: false,
-                image: "../../public/img/chiaotzu.png"
+                image: "/img/chiaotzu.png"
             },
             {
                 id: 3,
                 clicked: false,
-                image: "../../public/img/krillin.png"
+                image: "/img/krillin.png"
             },
             {
                 id: 4,
                 clicked: false,
-                image: "../../public/img/mrpopo.png"
+                image: "/img/mrpopo.png"
             },
             {
                 id: 5,
                 clicked: false,
-                image: "../../public/img/mutenroshi.png"
+                image: "/img/mutenroshi.png"
             },
             {
                 id: 6,
                 clicked: false,
-                image: "../../public/img/oolong.png"
+                image: "/img/oolong.png"
             },
             {
                 id: 7,
                 clicked: false,
-                image: "../../public/img/piccolo.png"
+                image: "/img/piccolo.png"
             },
             {
                 id: 8,
                 clicked: false,
-                image: "../../public/img/pilaf.png"
+                image: "/img/pilaf.png"
             },
             {
                 id: 9,
                 clicked: false,
-                image: "../../public/img/tenshinhan.png"
+                image: "/img/tenshinhan.png"
             },
             {
                 id: 10,
                 clicked: false,
-                image: "../../public/img/yajirobe.png"
+                image: "/img/yajirobe.png"
             },
             {
                 id: 11,
                 clicked: false,
-                image: "../../public/img/yamucha.png"
+                image: "/img/yamucha.png"
             }
         ],
         score: 0,
@@ -79,18 +79,20 @@ class ImageContainer extends Component {
     }
 
     handleClick = event => {
-        const id = event.target[data-id];
+        const id = event.target.dataset.dataId;
         const values = this.getImageById(id);
         const clickedImg = values[0];
         const clickedIndex = values[1];
 
+        console.log("clicked");
+
         // If the image has not been clicked before now.
-        if (!clickedImg[clicked]) {
+        if (!clickedImg.clicked) {
             // Create new data array without the item that was clicked.
             const newData = this.state.data.slice(0, clickedIndex) +
                 this.state.data.slice(clickedIndex + 1);
             // Set clicked to true and add the clicked item back in.
-            clickedImg[clicked] = true;
+            clickedImg.clicked = true;
             newData.push(clickedImg);
             // Check if the new score is higher than topScore and setState.
             if ((this.state.score + 1) > this.state.topScore) {
@@ -126,7 +128,7 @@ class ImageContainer extends Component {
         let i = arrCopy.length - 1;
         for (; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            temp = arrCopy[i];
+            let temp = arrCopy[i];
             arrCopy[i] = arrCopy[j];
             arrCopy[j] = temp;
         }
@@ -142,22 +144,35 @@ class ImageContainer extends Component {
     }
 
     setClickedFalse = arr => {
-        arrCopy = arr.slice();
+        const arrCopy = arr.slice();
         arrCopy.forEach(item => {
             item.clicked = false;
         })
         return arrCopy;
     }
 
-
     render() {
         return (
             <div>
-                <NavBar / >
-                <Header / >
-                
+                <NavBar 
+                  score={this.state.score}
+                  topScore={this.state.topScore} 
+                />
+                <Head / >
+                <div className="container">
+                    {this.state.data.map(img => (
+                        <Image
+                          key={img.id}
+                          id={img.id}
+                          image={img.image}
+                          onClick={(e) => this.handleClick(e)}
+                        />
+                    ))}
+                </div>
             </div>
 
         )
     }
 }
+
+export default ImageContainer;
