@@ -69,7 +69,8 @@ class ImageContainer extends Component {
             }
         ],
         score: 0,
-        topScore: 0
+        topScore: 0,
+        notification: "Click an image to begin!"
     }
 
     componentDidMount() {
@@ -95,12 +96,14 @@ class ImageContainer extends Component {
                 this.setState({
                     data: this.shuffleArray(newData),
                     score: this.state.score + 1,
+                    notification: "You guessed correctly!",
                     topScore: this.state.score + 1
                 });
             } else {
                 this.setState({
                     data: this.shuffleArray(newData),
-                    score: this.state.score + 1
+                    score: this.state.score + 1,
+                    notification: "You guessed correctly!"
                 });
             }
         } else {
@@ -112,7 +115,8 @@ class ImageContainer extends Component {
             // Leaving topScore untouched so that we keep the user's topScore.
             this.setState({
                 data: this.shuffleArray(unclickedData),
-                score: 0
+                score: 0,
+                notification: "You guessed incorrectly!"
             })
         }
     }
@@ -161,6 +165,7 @@ class ImageContainer extends Component {
                 <NavBar 
                   score={this.state.score}
                   topScore={this.state.topScore} 
+                  notification={this.state.notification}
                 />
                 <Head / >
                 <div className="container">

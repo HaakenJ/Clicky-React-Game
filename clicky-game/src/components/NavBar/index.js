@@ -8,11 +8,14 @@ function NavBar(props) {
         <li className="brand">
           <a href="/">Clicky Game</a>
         </li>
-        <li>
-                  Click an image to begin!
+        <li className={props.notification.includes(" correctly") ? 
+          "correct": 
+          "incorrect"}
+        >
+          {props.notification}
         </li>
         <li>
-                  Score: {props.score} | Top Score: {props.topScore}
+          Score: {props.score} | Top Score: {props.topScore}
         </li>
       </ul>
     </nav>
