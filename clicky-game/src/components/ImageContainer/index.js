@@ -165,7 +165,7 @@ class ImageContainer extends Component {
                           key={img.id}
                           id={img.id}
                           image={img.image}
-                          onClick={(e) => this.handleClick(e)}
+                          onClick={this.handleClick}
                         />
                     ))}
                 </div>
