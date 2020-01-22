@@ -1,76 +1,77 @@
 import React, {
     Component
-} from "react";
-import NavBar from "../NavBar";
-import Head from "../Head";
-import Image from "../Image";
-import "./style.css";
+} from 'react';
+import NavBar from '../NavBar';
+import Head from '../Head';
+import Image from '../Image';
+import './style.css';
 
 class ImageContainer extends Component {
     state = {
         data: [{
                 id: 0,
                 clicked: false,
-                image: "/img/goku.png"
+                image: '/img/goku.png'
             }, {
                 id: 1,
                 clicked: false,
-                image: "/img/bulma.png"
+                image: '/img/bulma.png'
             },
             {
                 id: 2,
                 clicked: false,
-                image: "/img/chiaotzu.png"
+                image: '/img/chiaotzu.png'
             },
             {
                 id: 3,
                 clicked: false,
-                image: "/img/krillin.png"
+                image: '/img/krillin.png'
             },
             {
                 id: 4,
                 clicked: false,
-                image: "/img/mrpopo.png"
+                image: '/img/mrpopo.png'
             },
             {
                 id: 5,
                 clicked: false,
-                image: "/img/mutenroshi.png"
+                image: '/img/mutenroshi.png'
             },
             {
                 id: 6,
                 clicked: false,
-                image: "/img/oolong.png"
+                image: '/img/oolong.png'
             },
             {
                 id: 7,
                 clicked: false,
-                image: "/img/piccolo.png"
+                image: '/img/piccolo.png'
             },
             {
                 id: 8,
                 clicked: false,
-                image: "/img/pilaf.png"
+                image: '/img/pilaf.png'
             },
             {
                 id: 9,
                 clicked: false,
-                image: "/img/tenshinhan.png"
+                image: '/img/tenshinhan.png'
             },
             {
                 id: 10,
                 clicked: false,
-                image: "/img/yajirobe.png"
+                image: '/img/yajirobe.png'
             },
             {
                 id: 11,
                 clicked: false,
-                image: "/img/yamucha.png"
+                image: '/img/yamucha.png'
             }
         ],
         score: 0,
         topScore: 0,
-        notification: "Click an image to begin!"
+        notification: 'Click an image to begin!',
+        shake: false
     }
 
     componentDidMount() {
@@ -96,19 +97,21 @@ class ImageContainer extends Component {
                 this.setState({
                     data: this.shuffleArray(newData),
                     score: this.state.score + 1,
-                    notification: "You guessed correctly!",
-                    topScore: this.state.score + 1
+                    notification: 'You guessed correctly!',
+                    topScore: this.state.score + 1,
+                    shake: false
                 });
             } else {
                 this.setState({
                     data: this.shuffleArray(newData),
                     score: this.state.score + 1,
-                    notification: "You guessed correctly!"
+                    notification: 'You guessed correctly!',
+                    shake: false
                 });
             }
         } else {
             // TO-DO: Give some kind of notification that the user lost.
-            console.log("lost");
+            console.log('lost');
             // Set all clicked values to false.
             const unclickedData = this.resetArrToFalse(this.state.data);
             // Reset and rerender data and score.
@@ -116,7 +119,8 @@ class ImageContainer extends Component {
             this.setState({
                 data: this.shuffleArray(unclickedData),
                 score: 0,
-                notification: "You guessed incorrectly!"
+                notification: 'You guessed incorrectly!',
+                shake: true
             })
         }
     }
@@ -168,12 +172,13 @@ class ImageContainer extends Component {
                   notification={this.state.notification}
                 />
                 <Head / >
-                <div className="container">
+                <div className='container'>
                     {this.state.data.map(img => (
                         <Image
                           key={img.id}
                           id={img.id}
                           image={img.image}
+                          shake={this.state.shake}
                           onClick={this.handleClick}
                         />
                     ))}
