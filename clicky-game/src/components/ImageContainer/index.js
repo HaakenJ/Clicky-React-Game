@@ -79,33 +79,27 @@ class ImageContainer extends Component {
     }
 
     handleClick = event => {
-        const id = event.target.dataset.dataId;
-        const values = this.getImageById(id);
-        const clickedImg = values[0];
-        const clickedIndex = values[1];
-
-        console.log("clicked");
+        const id = event.target.dataset.id;
+        // const values = this.getImageById(id);
+        // const clickedImg = values[0];
+        // const clickedIndex = values[1];
 
         // If the image has not been clicked before now.
-        if (!clickedImg.clicked) {
-            // Create new data array without the item that was clicked.
-            const newData = this.state.data.slice(0, clickedIndex) +
-                this.state.data.slice(clickedIndex + 1);
-            // Set clicked to true and add the clicked item back in.
-            clickedImg.clicked = true;
-            newData.push(clickedImg);
+        if (!this.checkIfClicked(id)) {
+            console.log(this.state.data);
+            // Get a new array with the clicked item's 
+            // clicked value set to true.
+            const newData = this.setClickedTrue(id);
             // Check if the new score is higher than topScore and setState.
             if ((this.state.score + 1) > this.state.topScore) {
                 this.setState({
-                    data: newData,
+                    data: this.shuffleArray(newData),
                     score: this.state.score + 1,
-                    // Not sure if score will update before topScore.
-                    // May be a race condition...
-                    topScore: this.state.score
+                    topScore: this.state.score + 1
                 });
             } else {
                 this.setState({
-                    data: newData,
+                    data: this.shuffleArray(newData),
                     score: this.state.score + 1
                 });
             }
@@ -113,7 +107,7 @@ class ImageContainer extends Component {
             // TO-DO: Give some kind of notification that the user lost.
             console.log("lost");
             // Set all clicked values to false.
-            const unclickedData = this.setClickedFalse(this.state.data);
+            const unclickedData = this.resetArrToFalse(this.state.data);
             // Reset and rerender data and score.
             // Leaving topScore untouched so that we keep the user's topScore.
             this.setState({
@@ -135,15 +129,25 @@ class ImageContainer extends Component {
         return arrCopy;
     }
 
-    getImageById = id => {
+    checkIfClicked = id => {
         for (let i = 0; i < this.state.data.length; i++) {
-            if (this.state.data[i].id === id) {
-                return [this.state.data[i], i];
+            if (this.state.data[i].id === parseInt(id)) {
+                return this.state.data[i].clicked;
             }
         }
     }
 
-    setClickedFalse = arr => {
+    setClickedTrue = id => {
+        const arrCopy = this.state.data.slice();
+        for (let i = 0; i < arrCopy.length; i++) {
+            if (arrCopy[i].id === parseInt(id)) {
+                arrCopy[i].clicked = true;
+                return arrCopy;
+            }
+        }
+    }
+
+    resetArrToFalse = arr => {
         const arrCopy = arr.slice();
         arrCopy.forEach(item => {
             item.clicked = false;
