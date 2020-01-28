@@ -73,6 +73,8 @@ class ImageContainer extends Component {
         notification: 'Click an image to begin!',
         shake: false
     }
+    
+    
 
     componentDidMount() {
         this.setState({
