@@ -88,7 +88,6 @@ class ImageContainer extends Component {
 
         // If the image has not been clicked before now.
         if (!this.checkIfClicked(id)) {
-            console.log(this.state.data);
             // Get a new array with the clicked item's 
             // clicked value set to true.
             const newData = this.setClickedTrue(id);
@@ -110,8 +109,6 @@ class ImageContainer extends Component {
                 });
             }
         } else {
-            // TO-DO: Give some kind of notification that the user lost.
-            console.log('lost');
             // Set all clicked values to false.
             const unclickedData = this.resetArrToFalse(this.state.data);
             // Reset and rerender data and score.
